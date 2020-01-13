@@ -7,13 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -88,20 +85,12 @@ public class MainActivity extends AppCompatActivity {
 
         videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/raw/video"));
         videoView.start();
-        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mediaPlayer) {
-                mediaPlayer.start();
-                mediaPlayer.setLooping(true);
-            }
-        });
-
 
         videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
-                videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/raw/video"));
-                videoView.start();
+                mediaPlayer.start();
+                mediaPlayer.setLooping(true);
             }
         });
     }
@@ -153,8 +142,23 @@ public class MainActivity extends AppCompatActivity {
         long zeroT = startTime / (1000 * 3600 * 24) * (1000 * 3600 * 24) - TimeZone.getDefault().getRawOffset();  //今天零点零分零秒的毫秒数
         endTime = zeroT + 24 * 60 * 60 * 1000 - 1;  //今天23点59分59秒的毫秒数
 
-        midTime = (endTime - startTime) / 1000;
+        midTime = (endTime - startTime) / 1000 + 4;//TODO 不知道为什么 倒计时时间老是 快走了  4s左右
+
+//        time1 = System.currentTimeMillis();
+//        System.out.println("开始时间:" + time1);
     }
+
+//    private void initDate() {
+//        Date currentDate = new Date();
+//        Calendar midnight= Calendar.getInstance();
+//        midnight.setTime(currentDate);
+//        midnight.add(midnight.DAY_OF_MONTH,1);
+//        midnight.set(midnight.HOUR_OF_DAY,0);
+//        midnight.set(midnight.MINUTE,0);
+//        midnight.set(midnight.SECOND,0);
+//        midnight.set(midnight.MILLISECOND,0);
+//        midTime = (midnight.getTime().getTime()-currentDate.getTime())/1000;
+//    }
 
     /**
      * 给定时长倒计时
@@ -185,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+
 
                 if (second == 0) {
                     tv5.setImageDrawable(smallImgList.get(0));
@@ -245,6 +250,11 @@ public class MainActivity extends AppCompatActivity {
 
                     testDay = days;
                 }
+
+
+//                time2 = System.currentTimeMillis();
+//                System.out.println("结束时间" + time2);
+//                System.out.println("运行时长" + (time2 - time1));
             }
         });
     }
@@ -258,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
     private String getDays() {
         Date nowDate = new Date(System.currentTimeMillis());//当前时间
         long nowDateLong = nowDate.getTime();
-        String endTimeStr = "2020-11-03" + " 12:00:00";
+        String endTimeStr = "2020-11-03" + " 00:00:00";
         // String endTimeStr = "2017-12-29"+ " 15:45:00";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date enddate = null;

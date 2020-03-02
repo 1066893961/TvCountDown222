@@ -25,6 +25,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+/**
+ * 公司前台电视上使用的上市时间倒计时小程序
+ */
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.d_tv1)

@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         banner.setAdapter(new BGABanner.Adapter<ImageView, BannerBean>() {
             @Override
             public void fillBannerItem(BGABanner banner, ImageView itemView, BannerBean model, int position) {
-                itemView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                itemView.setScaleType(ImageView.ScaleType.FIT_XY);
                 itemView.setImageDrawable(model.getImg());
 
             }
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         banner.setPageChangeDuration(500);
-        banner.setAutoPlayInterval(60000);
+        banner.setAutoPlayInterval(5000);
 
         initList();
 //        days = getDays();
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
 //        smallImgList.add(getDrawable(R.mipmap.small_8));
 //        smallImgList.add(getDrawable(R.mipmap.small_9));
 
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < 13; i++) {
             BannerBean bannerBean = new BannerBean();
             if (i == 0) {
                 bannerBean.setImg(getResources().getDrawable(R.mipmap.banner1));
@@ -147,27 +147,33 @@ public class MainActivity extends AppCompatActivity {
                 bannerBean.setImg(getResources().getDrawable(R.mipmap.banner10));
             } else if (i == 10) {
                 bannerBean.setImg(getResources().getDrawable(R.mipmap.banner11));
+            } else if (i == 11) {
+                bannerBean.setImg(getResources().getDrawable(R.mipmap.banner12));
+            } else if (i == 12) {
+                bannerBean.setImg(getResources().getDrawable(R.mipmap.banner13));
             }
             bannerList.add(bannerBean);
         }
 
+        banner.setAutoPlayAble(true);
         banner.setData(bannerList, null);
     }
 
     /**
      * 以最省内存的方式读取本地资源的图片
+     *
      * @param context
-     *@param resId
+     * @param resId
      * @return
      */
-    public  Bitmap readBitMap(Context context, int resId){
+    public Bitmap readBitMap(Context context, int resId) {
         BitmapFactory.Options opt = new BitmapFactory.Options();
         opt.inPreferredConfig = Bitmap.Config.RGB_565;
         opt.inPurgeable = true;
         opt.inInputShareable = true;
         //获取资源图片
         InputStream is = context.getResources().openRawResource(resId);
-        return BitmapFactory.decodeStream(is,null,opt);
+        return BitmapFactory.decodeStream(is, null, opt);
     }
 
 

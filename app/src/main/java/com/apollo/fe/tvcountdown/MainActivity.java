@@ -80,6 +80,15 @@ public class MainActivity extends AppCompatActivity {
         banner.setAutoPlayInterval(5000);
 
         initList();
+
+
+        banner.setDelegate(new BGABanner.Delegate<ImageView, BannerBean>() {
+            @Override
+            public void onBannerItemClick(BGABanner banner, ImageView itemView, BannerBean model, int position) {
+                PersonWebViewActivity.startActivity(getApplicationContext());
+            }
+        });
+
 //        days = getDays();
 //        initDate();
 //        startCountDown();

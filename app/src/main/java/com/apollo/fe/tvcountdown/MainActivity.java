@@ -5,30 +5,20 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.apollo.fe.tvcountdown.bgabanner.BGABanner;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.InputStream;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -367,4 +357,6 @@ public class MainActivity extends AppCompatActivity {
             unbinder.unbind();
         }
     }
+
+
 }

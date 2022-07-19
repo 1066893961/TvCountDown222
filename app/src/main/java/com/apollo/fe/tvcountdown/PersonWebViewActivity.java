@@ -6,6 +6,7 @@ import android.net.http.SslError;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.SslErrorHandler;
@@ -45,6 +46,7 @@ public class PersonWebViewActivity extends AppCompatActivity {
     private int tag = 0;//
     private Handler mHandler = new MyHandler();
     private static final int REQUEST_MSG = 200;
+    private int mPeriod = 5000;
 
     private class MyHandler extends Handler {
         @Override
@@ -53,7 +55,7 @@ public class PersonWebViewActivity extends AppCompatActivity {
                 case REQUEST_MSG:
                     Webview.loadUrl(urlList.get(tag));
                     tag++;
-                    if (tag == 3) {
+                    if (tag == 9) {
                         tag = 0;
                     }
                     break;
@@ -84,10 +86,15 @@ public class PersonWebViewActivity extends AppCompatActivity {
         urlList.add("https://blockchain-view.huijinchain.com/#/dashboard/platformBlockDt?channelId=2&channelName=bill");
         urlList.add("https://blockchain-view.huijinchain.com/#/dashboard/platformBlockDt?channelId=3&channelName=scb");
         urlList.add("https://blockchain-view.huijinchain.com/#/dashboard/platformBlockDt?channelId=4&channelName=book");
+        urlList.add("https://blockchain-view.huijinchain.com/#/dashboard");
+        urlList.add("https://blockchain-view.huijinchain.com/#/dashboard/platformBlockDt?channelId=2&channelName=apollo");
+        urlList.add("https://blockchain-view.huijinchain.com/#/dashboard/platformBlockDt?channelId=1&channelName=bill");
+        urlList.add("https://blockchain-view.huijinchain.com/#/dashboard/platformBlockDt?channelId=4&channelName=book");
+        urlList.add("https://blockchain-view.huijinchain.com/#/dashboard/platformBlockDt?channelId=3&channelName=scb");
 
         //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
         WebSettings webSettings = Webview.getSettings();
-        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+//        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         Webview.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -108,12 +115,31 @@ public class PersonWebViewActivity extends AppCompatActivity {
         });
 
         webSettings.setJavaScriptEnabled(true);
-        webSettings.setDomStorageEnabled(true);
-        webSettings.setUseWideViewPort(true);
+//        webSettings.setDomStorageEnabled(true);
+//        webSettings.setUseWideViewPort(true);
 //        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
         Webview.setWebChromeClient(new WebChromeClient());
         Webview.getSettings().setUserAgentString("PC");
-
+//        Webview.getSettings().setLoadWithOverviewMode(true);
+//        Webview.getSettings().setTextSize(WebSettings.TextSize.NORMAL);// 固定页面字体大小
+//        Webview.getSettings().setSupportZoom(false);//支持缩放
+//        Webview.getSettings().setBuiltInZoomControls(false);//设置支持缩放机制
+//        DisplayMetrics dm = getResources().getDisplayMetrics();
+//
+//        int scale = dm.densityDpi;
+//
+//        if (scale >= DisplayMetrics.DENSITY_HIGH) {//240
+//
+//            Webview.getSettings().setDefaultZoom(WebSettings.ZoomDensity.FAR);//far:240dp
+//
+//        } else if (scale == DisplayMetrics.DENSITY_MEDIUM) {//160
+//
+//            Webview.getSettings().setDefaultZoom(WebSettings.ZoomDensity.MEDIUM);//medium:160dp
+//
+//        } else {
+//            Webview.getSettings().setDefaultZoom(WebSettings.ZoomDensity.CLOSE);//close:120dp
+//
+//        }
 
         Webview.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -132,14 +158,29 @@ public class PersonWebViewActivity extends AppCompatActivity {
         timer.scheduleAtFixedRate(new TimerTask() {
 
             public void run() {
-                sendMessageDelayed(REQUEST_MSG,0);
+                if (tag == 5){
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            super.run();
+                            try {
+                                Thread.sleep(10000);//休眠10秒
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            sendMessageDelayed(REQUEST_MSG, 0);
+                        }
+                    }.start();
+
+                }else {
+                    sendMessageDelayed(REQUEST_MSG, 0);
+                }
             }
 
-        }, 1000, 5000);
+        }, 0, mPeriod);
 
 
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

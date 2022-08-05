@@ -51,7 +51,7 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
 
-    @OnClick({R.id.btn1, R.id.btn2})
+    @OnClick({R.id.btn1, R.id.btn2, R.id.btn3})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn1:
@@ -59,6 +59,9 @@ public class MainActivity2 extends AppCompatActivity {
                 break;
             case R.id.btn2:
                startActivity(new Intent(this, MainActivity.class));
+                break;
+           case R.id.btn3:
+               startActivity(new Intent(this, GifActivity.class));
                 break;
         }
     }

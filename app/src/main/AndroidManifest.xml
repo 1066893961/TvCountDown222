@@ -39,6 +39,9 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="landscape" />
+      <activity
+            android:name=".GifActivity"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

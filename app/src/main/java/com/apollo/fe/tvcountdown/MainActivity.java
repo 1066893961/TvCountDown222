@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.apollo.fe.tvcountdown.bgabanner.BGABanner;
@@ -18,7 +19,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**

@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 //        smallImgList.add(getDrawable(R.mipmap.small_8));
 //        smallImgList.add(getDrawable(R.mipmap.small_9));
 
-        for (int i = 0; i < 13; i++) {
+        for (int i = 0; i < 7; i++) {
             BannerBean bannerBean = new BannerBean();
             if (i == 0) {
                 bannerBean.setImg(getResources().getDrawable(R.mipmap.banner1));
@@ -138,19 +138,21 @@ public class MainActivity extends AppCompatActivity {
                 bannerBean.setImg(getResources().getDrawable(R.mipmap.banner6));
             } else if (i == 6) {
                 bannerBean.setImg(getResources().getDrawable(R.mipmap.banner7));
-            } else if (i == 7) {
-                bannerBean.setImg(getResources().getDrawable(R.mipmap.banner8));
-            } else if (i == 8) {
-                bannerBean.setImg(getResources().getDrawable(R.mipmap.banner9));
-            } else if (i == 9) {
-                bannerBean.setImg(getResources().getDrawable(R.mipmap.banner10));
-            } else if (i == 10) {
-                bannerBean.setImg(getResources().getDrawable(R.mipmap.banner11));
-            } else if (i == 11) {
-                bannerBean.setImg(getResources().getDrawable(R.mipmap.banner12));
-            } else if (i == 12) {
-                bannerBean.setImg(getResources().getDrawable(R.mipmap.banner13));
             }
+
+//            else if (i == 7) {
+//                bannerBean.setImg(getResources().getDrawable(R.mipmap.banner8));
+//            } else if (i == 8) {
+//                bannerBean.setImg(getResources().getDrawable(R.mipmap.banner9));
+//            } else if (i == 9) {
+//                bannerBean.setImg(getResources().getDrawable(R.mipmap.banner10));
+//            } else if (i == 10) {
+//                bannerBean.setImg(getResources().getDrawable(R.mipmap.banner11));
+//            } else if (i == 11) {
+//                bannerBean.setImg(getResources().getDrawable(R.mipmap.banner12));
+//            } else if (i == 12) {
+//                bannerBean.setImg(getResources().getDrawable(R.mipmap.banner13));
+//            }
             bannerList.add(bannerBean);
         }
 
